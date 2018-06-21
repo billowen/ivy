@@ -1,0 +1,1 @@
+INSERT INTO items (description, dateuploaded) VALUES ('test', now());
