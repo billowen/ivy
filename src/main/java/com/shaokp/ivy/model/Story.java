@@ -1,5 +1,6 @@
 package com.shaokp.ivy.model;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;

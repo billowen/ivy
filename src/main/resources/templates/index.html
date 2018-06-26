@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <title>Home</title>
-    <link rel="stylesheet" href="../static/dist/css/milo.css" />
+    <link rel="stylesheet" href="../static/dist/css/milo.css" th:href="@{/dist/css/milo.css}"/>
 </head>
 <body>
 <header role="banner">
@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse order-3 order-md-2" id="navbar">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a href="post-new.html" class="nav-link">New story</a>
+                        <a href="post-new.html" class="nav-link" th:href="@{/newStory}">New story</a>
                     </li>
                 </ul>
             </div>
@@ -33,6 +33,6 @@
         </div>
     </nav>
 </header>
-<script src="../static/dist/js/bundle.js"></script>
+<script src="../static/dist/js/bundle.js" th:src="@{/dist/js/bundle.js}"></script>
 </body>
 </html>
