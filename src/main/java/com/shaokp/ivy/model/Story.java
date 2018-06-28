@@ -11,6 +11,7 @@ public class Story {
     private String content;
     private byte[] bytes;
     private LocalDateTime dateUploaded;
+    private String category;
 
     public Long getId() {
         return id;

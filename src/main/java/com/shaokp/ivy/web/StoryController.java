@@ -5,14 +5,13 @@ import com.shaokp.ivy.service.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class StoryController {
@@ -25,7 +24,12 @@ public class StoryController {
     }
 
     @RequestMapping("/")
-    public String showIndex() {
+    public String showIndex(Model model) throws SQLException {
+        List<Story> stories = storyService.findAll();
+        for (Story story : stories) {
+            System.out.println(story.getDateUploaded());
+        }
+        model.addAttribute("stories", stories);
         return "index";
     }
 
@@ -42,5 +46,20 @@ public class StoryController {
     public String addStory(Story story, @RequestParam MultipartFile file) throws SQLException, IOException {
         storyService.save(story, file);
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/getImage/{id}")
+    @ResponseBody
+    public byte[] getImage(@PathVariable(value = "id") Long id) throws SQLException {
+        Story story = storyService.findById(id);
+        return story.getBytes();
+    }
+
+    @RequestMapping(value = "/story/{id}")
+    public String showStoryDetail(@PathVariable(value = "id") Long id, Model model) throws SQLException {
+        Story story = storyService.findById(id);
+        model.addAttribute("story", story);
+
+        return "article";
     }
 }

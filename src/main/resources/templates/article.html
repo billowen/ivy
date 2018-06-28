@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <title>Home</title>
+    <meta charset="UTF-8">
+    <title>Time Machine</title>
     <link rel="stylesheet" href="../static/dist/css/milo.css" th:href="@{/dist/css/milo.css}"/>
 </head>
 <body>
@@ -37,22 +37,19 @@
 <main class="main pt-4" role="main">
     <div class="container">
         <div class="row">
-
-            <div class="col-md-4" th:each="story : ${stories}">
+            <div class="col-md-8 offset-md-2">
                 <article class="card mb-4">
-                    <header class="card-header">
+                    <header class="card-header text-center">
                         <div class="card-meta">
                             <time class="timeago" datetime="2017-10-26 20:00" th:datetime="${story.dateUploaded}"></time>
                         </div>
-                        <a href="#" th:href="@{/story/{id}(id=${story.id})}">
-                            <h4 class="card-title" th:text="${story.title}">Test header</h4>
+                        <a href="#">
+                            <h1 class="card-title" th:text="${story.title}">Test title</h1>
                         </a>
                     </header>
-                    <a href="#" th:href="@{/story/{id}(id=${story.id})}">
-                        <img src="../static/img/1.jpg" th:src="@{/getImage/{id}(id=${story.id})}" alt="" class="card-img">
-                    </a>
+                    <img src="../static/img/1.jpg" alt="" class="card-img" th:src="@{/getImage/{id}(id=${story.id})}"/>
                     <div class="card-body">
-                        <p class="card-text" th:text="${story.content}">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
+                        <p th:text="${story.content}">test test test</p>
                     </div>
                 </article>
             </div>
@@ -68,7 +65,6 @@
         </div>
     </div>
 </footer>
-
 <script src="../static/dist/js/bundle.js" th:src="@{/dist/js/bundle.js}"></script>
 </body>
 </html>
