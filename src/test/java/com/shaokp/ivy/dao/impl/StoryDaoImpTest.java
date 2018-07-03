@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -69,4 +70,17 @@ public class StoryDaoImpTest {
         assertThat(stories, hasSize(1));
     }
 
+    @Test
+    public void test_listAllTags() throws Exception {
+        List<String> tags = storyDao.listAllTags();
+        assertThat(tags, hasSize(2));
+        assertThat(tags, hasItem("A"));
+        assertThat(tags, hasItem("B"));
+    }
+
+    @Test
+    public void test_findByTag() throws Exception {
+        List<Story> stories = storyDao.findByTag("A");
+        assertThat(stories, hasSize(1));
+    }
 }

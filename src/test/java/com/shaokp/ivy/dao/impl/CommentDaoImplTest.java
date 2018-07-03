@@ -42,12 +42,6 @@ public class CommentDaoImplTest {
         commentDao.save(comment);
     }
 
-    @Test
-    public void test_update() throws Exception {
-        Comment comment = new Comment();
-        comment.setId(1L);
-        commentDao.save(comment);
-    }
 
     @Test
     public void test_delete() throws Exception {

@@ -7,6 +7,8 @@ public class Comment {
     private Long id;
     private Long storyId;
     private String content = "";
+    private String name = "";
+    private String email = "";
     private LocalDateTime dateUpdate = LocalDateTime.now();
 
     public Long getId() {
@@ -41,6 +43,22 @@ public class Comment {
         this.dateUpdate = dateUpdate;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,13 +66,15 @@ public class Comment {
         Comment comment = (Comment) o;
         return Objects.equals(id, comment.id) &&
                 Objects.equals(storyId, comment.storyId) &&
-                Objects.equals(content, comment.content);
+                Objects.equals(content, comment.content) &&
+                Objects.equals(name, comment.name) &&
+                Objects.equals(email, comment.email);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, storyId, content);
+        return Objects.hash(id, storyId, content, name, email);
     }
 
     @Override
@@ -63,6 +83,8 @@ public class Comment {
                 "id=" + id +
                 ", storyId=" + storyId +
                 ", content='" + content + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

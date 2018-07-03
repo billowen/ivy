@@ -32,6 +32,8 @@ public class CommentDaoImpl implements CommentDao {
                     comment.setStoryId(rs.getLong("story_id"));
                     comment.setContent(rs.getString("content"));
                     comment.setDateUpdate(rs.getTimestamp("date_update").toLocalDateTime());
+                    comment.setName(rs.getString("name"));
+                    comment.setEmail(rs.getString("email"));
                     comments.add(comment);
                 }
             }
@@ -41,21 +43,14 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public void save(Comment comment) throws SQLException {
-        String saveSql = "insert into comments (story_id, content, date_update) values (?, ?, now())";
-        String updateSql = "update comments set content=?, date_update=now() where id=?";
+        String saveSql = "insert into comments (story_id, content, name, email, date_update) values (?, ?, ?, ?, now())";
         try (Connection conn = dataSource.getConnection()) {
-            if (comment.getId() == null || comment.getId() <= 0) {
-                try (PreparedStatement stmt = conn.prepareStatement(saveSql)) {
-                    stmt.setLong(1, comment.getStoryId());
-                    stmt.setString(2, comment.getContent());
-                    stmt.execute();
-                }
-            } else {
-                try (PreparedStatement stmt = conn.prepareStatement(updateSql)) {
-                    stmt.setString(1, comment.getContent());
-                    stmt.setLong(2, comment.getId());
-                    stmt.execute();
-                }
+            try (PreparedStatement stmt = conn.prepareStatement(saveSql)) {
+                stmt.setLong(1, comment.getStoryId());
+                stmt.setString(2, comment.getContent());
+                stmt.setString(3, comment.getName());
+                stmt.setString(4, comment.getEmail());
+                stmt.execute();
             }
         }
     }

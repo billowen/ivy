@@ -24,7 +24,7 @@ public class StoryDaoImp implements StoryDao {
         List<Story> stories = new ArrayList<>();
         try (Connection conn = dataSource.getConnection()) {
             try (Statement stmt = conn.createStatement()) {
-                String sql = "select * from stories";
+                String sql = "select * from stories order by dateuploaded";
                 ResultSet rs = stmt.executeQuery(sql);
                 while (rs.next()) {
                     Story story = new Story();
@@ -62,7 +62,39 @@ public class StoryDaoImp implements StoryDao {
 
     @Override
     public List<Story> findByTag(String tag) throws SQLException {
-        return null;
+        List<Story> stories = new ArrayList<>();
+        String sql = "select * from stories where tag=? order by dateuploaded";
+        try (Connection conn = dataSource.getConnection()) {
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, tag);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    Story story = new Story();
+                    story.setId(rs.getLong("id"));
+                    story.setTitle(rs.getString("title"));
+                    story.setBytes(rs.getBytes("bytes"));
+                    story.setDateUploaded(rs.getTimestamp("dateuploaded").toLocalDateTime());
+                    story.setTag(rs.getString("tag"));
+                    stories.add(story);
+                }
+            }
+        }
+        return stories;
+    }
+
+    @Override
+    public List<String> listAllTags() throws Exception {
+        List<String> tags = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection()) {
+            try (Statement stmt = conn.createStatement()) {
+                String sql = "select distinct tag from stories";
+                ResultSet rs = stmt.executeQuery(sql);
+                while (rs.next()) {
+                    tags.add(rs.getString("tag"));
+                }
+            }
+        }
+        return tags;
     }
 
     @Override

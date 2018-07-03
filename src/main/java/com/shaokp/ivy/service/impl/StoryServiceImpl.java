@@ -32,6 +32,16 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
+    public List<Story> findByTag(String tag) throws Exception {
+        return storyDao.findByTag(tag);
+    }
+
+    @Override
+    public List<String> listAllTags() throws Exception {
+        return storyDao.listAllTags();
+    }
+
+    @Override
     public void save(Story story) throws Exception {
         storyDao.save(story);
     }

@@ -12,6 +12,8 @@ DROP TABLE IF EXISTS comments;
 CREATE TABLE comments (
   id bigint auto_increment,
   story_id bigint,
+  name varchar(20),
+  email varchar(50),
   content varchar(1000),
   date_update timestamp,
   primary key (id)
