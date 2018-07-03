@@ -22,23 +22,22 @@ public class StoryServiceImpl implements StoryService {
 
 
     @Override
-    public List<Story> findAll() throws SQLException {
+    public List<Story> findAll() throws Exception {
         return storyDao.findAll();
     }
 
     @Override
-    public Story findById(Long id) throws SQLException {
+    public Story findById(Long id) throws Exception {
         return storyDao.findById(id);
     }
 
     @Override
-    public void save(Story story, MultipartFile file) throws SQLException, IOException {
-        story.setBytes(file.getBytes());
+    public void save(Story story) throws Exception {
         storyDao.save(story);
     }
 
     @Override
-    public void delete(Story story) throws SQLException {
+    public void delete(Story story) throws Exception {
         storyDao.delete(story);
     }
 }

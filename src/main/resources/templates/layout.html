@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Home</title>
+    <link rel="stylesheet" href="../static/dist/css/milo.css" th:href="@{/dist/css/milo.css}"/>
+</head>
+<body>
+
+<header role="banner" th:fragment="nav">
+    <nav class="navbar navbar-expand-md navbar-light bg-white absolute-top">
+        <div class="container">
+            <button class="navbar-toggler order-2 order-md-1" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse order-3 order-md-2" id="navbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="post-new.html" class="nav-link" th:href="@{/newStory}">New story</a>
+                    </li>
+                </ul>
+            </div>
+
+            <a href="#" class="navbar-brand order-1 order-md-3 mx-auto">Time machine</a>
+
+            <div class="collapse navbar-collapse order-4 order-md-4" id="navbar2">
+                <ul class="ml-auto">
+
+                </ul>
+                <form action="#" class="form-inline" role="search">
+                    <input type="text" class="search js-search form-control form-control-rounded ml-auto mr-auto" title="Enter search query here" placeholder="Search..." />
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+</body>
+</html>

@@ -1,6 +1,5 @@
 package com.shaokp.ivy.model;
 
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;
@@ -8,10 +7,9 @@ import java.util.Objects;
 public class Story {
     private Long id;
     private String title;
-    private String content;
     private byte[] bytes;
     private LocalDateTime dateUploaded;
-    private String category;
+    private String tag;
 
     public Long getId() {
         return id;
@@ -27,14 +25,6 @@ public class Story {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public byte[] getBytes() {
@@ -53,6 +43,14 @@ public class Story {
         this.dateUploaded = dateUploaded;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,14 +58,26 @@ public class Story {
         Story story = (Story) o;
         return Objects.equals(id, story.id) &&
                 Objects.equals(title, story.title) &&
-                Objects.equals(content, story.content) &&
-                Arrays.equals(bytes, story.bytes);
+                Arrays.equals(bytes, story.bytes) &&
+                Objects.equals(tag, story.tag);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, title, content);
+
+        int result = Objects.hash(id, title, tag);
         result = 31 * result + Arrays.hashCode(bytes);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Story{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", bytes=" + Arrays.toString(bytes) +
+                ", dateUploaded=" + dateUploaded +
+                ", tag='" + tag +
+                '}';
     }
 }

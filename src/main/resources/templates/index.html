@@ -6,33 +6,7 @@
     <link rel="stylesheet" href="../static/dist/css/milo.css" th:href="@{/dist/css/milo.css}"/>
 </head>
 <body>
-<header role="banner">
-    <nav class="navbar navbar-expand-md navbar-light bg-white absolute-top">
-        <div class="container">
-            <button class="navbar-toggler order-2 order-md-1" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse order-3 order-md-2" id="navbar">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a href="post-new.html" class="nav-link" th:href="@{/newStory}">New story</a>
-                    </li>
-                </ul>
-            </div>
-
-            <a href="#" class="navbar-brand order-1 order-md-3 mx-auto">Time machine</a>
-
-            <div class="collapse navbar-collapse order-4 order-md-4" id="navbar">
-                <ul class="ml-auto">
-
-                </ul>
-                <form action="#" class="form-inline" role="search">
-                    <input type="text" class="search js-search form-control form-control-rounded ml-auto mr-auto" title="Enter search query here" placeholder="Search..." />
-                </form>
-            </div>
-        </div>
-    </nav>
-</header>
+<header th:replace="layout::nav"></header>
 
 <main class="main pt-4" role="main">
     <div class="container">
@@ -44,16 +18,18 @@
                         <div class="card-meta">
                             <time class="timeago" datetime="2017-10-26 20:00" th:datetime="${story.dateUploaded}"></time>
                         </div>
-                        <a href="#" th:href="@{/story/{id}(id=${story.id})}">
-                            <h4 class="card-title" th:text="${story.title}">Test header</h4>
-                        </a>
+                        <!--<a href="#" th:href="@{/story/{id}(id=${story.id})}">-->
+                            <!--<h4 class="card-title" th:text="${story.title}">Test header</h4>-->
+                        <!--</a>-->
                     </header>
                     <a href="#" th:href="@{/story/{id}(id=${story.id})}">
-                        <img src="../static/img/1.jpg" th:src="@{/getImage/{id}(id=${story.id})}" alt="" class="card-img">
+                        <!--<img src="../static/img/text.jpg" th:src="@{/getImage/{id}(id=${story.id})}" alt="" class="card-img">-->
+                        <img src="../static/img/text.jpg" th:src="@{/getImage/{id}(id=${story.id})}" alt="" class="card-img">
+
                     </a>
-                    <div class="card-body">
-                        <p class="card-text" th:text="${story.content}">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
-                    </div>
+                    <!--<div class="card-body">-->
+                        <!--<p class="card-text" th:text="${story.content}">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>-->
+                    <!--</div>-->
                 </article>
             </div>
         </div>

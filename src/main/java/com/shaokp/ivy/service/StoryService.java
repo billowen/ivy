@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface StoryService {
-    List<Story> findAll() throws SQLException;
-    Story findById(Long id) throws SQLException;
-    void save(Story story, MultipartFile file) throws SQLException, IOException;
-    void delete(Story story) throws SQLException;
+    List<Story> findAll() throws Exception;
+    Story findById(Long id) throws Exception;
+    void save(Story story) throws Exception;
+    void delete(Story story) throws Exception;
 }
