@@ -43,10 +43,12 @@ public class StoryDaoImp implements StoryDao {
     @Override
     public Story findById(Long id) throws SQLException {
         Story story = null;
+        String sql = "select * from stories where id=?";
         try (Connection conn = dataSource.getConnection()) {
-            try (Statement stmt = conn.createStatement()) {
-                String sql = "select * from stories where id=" + id;
-                ResultSet rs = stmt.executeQuery(sql);
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+//                String sql = "select * from stories where id=" + id;
+                stmt.setLong(1, id);
+                ResultSet rs = stmt.executeQuery();
                 if (rs.next()) {
                     story = new Story();
                     story.setId(rs.getLong("id"));
