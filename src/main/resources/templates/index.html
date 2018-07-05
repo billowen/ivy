@@ -18,14 +18,13 @@
                         <div class="card-meta">
                             <time class="timeago" datetime="2017-10-26 20:00" th:datetime="${story.dateUploaded}"></time>
                         </div>
-                        <!--<a href="#" th:href="@{/story/{id}(id=${story.id})}">-->
-                            <!--<h4 class="card-title" th:text="${story.title}">Test header</h4>-->
-                        <!--</a>-->
+                        <a href="#" th:href="@{/story/{id}(id=${story.id})}">
+                            <h4 class="card-title" th:text="${story.title}">Test header</h4>
+                        </a>
                     </header>
                     <a href="#" th:href="@{/story/{id}(id=${story.id})}">
                         <!--<img src="../static/img/text.jpg" th:src="@{/getImage/{id}(id=${story.id})}" alt="" class="card-img">-->
                         <img src="../static/img/text.jpg" th:src="@{/getImage/{id}(id=${story.id})}" alt="" class="card-img">
-
                     </a>
                     <!--<div class="card-body">-->
                         <!--<p class="card-text" th:text="${story.content}">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>-->

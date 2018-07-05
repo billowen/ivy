@@ -12,7 +12,7 @@ public class DataConfig {
     public DataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost:3306/ivy");
+        ds.setUrl("jdbc:mysql://localhost:3306/ivy?useUnicode=true&characterEncoding=utf8");
         ds.setUsername("root");
         ds.setPassword("123456");
         return ds;

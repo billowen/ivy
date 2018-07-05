@@ -30,7 +30,7 @@ public class CommentDaoImpl implements CommentDao {
                     Comment comment = new Comment();
                     comment.setId(rs.getLong("id"));
                     comment.setStoryId(rs.getLong("story_id"));
-                    comment.setContent(rs.getString("content"));
+                    comment.setResponse(rs.getString("response"));
                     comment.setDateUpdate(rs.getTimestamp("date_update").toLocalDateTime());
                     comment.setName(rs.getString("name"));
                     comment.setEmail(rs.getString("email"));
@@ -43,11 +43,11 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public void save(Comment comment) throws SQLException {
-        String saveSql = "insert into comments (story_id, content, name, email, date_update) values (?, ?, ?, ?, now())";
+        String saveSql = "insert into comments (story_id, response, name, email, date_update) values (?, ?, ?, ?, now())";
         try (Connection conn = dataSource.getConnection()) {
             try (PreparedStatement stmt = conn.prepareStatement(saveSql)) {
                 stmt.setLong(1, comment.getStoryId());
-                stmt.setString(2, comment.getContent());
+                stmt.setString(2, comment.getResponse());
                 stmt.setString(3, comment.getName());
                 stmt.setString(4, comment.getEmail());
                 stmt.execute();

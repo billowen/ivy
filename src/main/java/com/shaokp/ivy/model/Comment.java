@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Comment {
     private Long id;
     private Long storyId;
-    private String content = "";
+    private String response = "";
     private String name = "";
     private String email = "";
     private LocalDateTime dateUpdate = LocalDateTime.now();
@@ -27,12 +27,12 @@ public class Comment {
         this.storyId = storyId;
     }
 
-    public String getContent() {
-        return content;
+    public String getResponse() {
+        return response;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setResponse(String response) {
+        this.response = response;
     }
 
     public LocalDateTime getDateUpdate() {
@@ -66,7 +66,7 @@ public class Comment {
         Comment comment = (Comment) o;
         return Objects.equals(id, comment.id) &&
                 Objects.equals(storyId, comment.storyId) &&
-                Objects.equals(content, comment.content) &&
+                Objects.equals(response, comment.response) &&
                 Objects.equals(name, comment.name) &&
                 Objects.equals(email, comment.email);
     }
@@ -74,7 +74,7 @@ public class Comment {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, storyId, content, name, email);
+        return Objects.hash(id, storyId, response, name, email);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class Comment {
         return "Comment{" +
                 "id=" + id +
                 ", storyId=" + storyId +
-                ", content='" + content + '\'' +
+                ", content='" + response + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 '}';

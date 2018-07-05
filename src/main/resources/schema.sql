@@ -14,7 +14,7 @@ CREATE TABLE comments (
   story_id bigint,
   name varchar(20),
   email varchar(50),
-  content varchar(1000),
+  response varchar(1000),
   date_update timestamp,
   primary key (id)
 );

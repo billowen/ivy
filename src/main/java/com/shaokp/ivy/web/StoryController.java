@@ -3,7 +3,9 @@ package com.shaokp.ivy.web;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.ExifIFD0Directory;
+import com.shaokp.ivy.model.Comment;
 import com.shaokp.ivy.model.Story;
+import com.shaokp.ivy.service.CommentService;
 import com.shaokp.ivy.service.RotateImage;
 import com.shaokp.ivy.service.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +26,27 @@ import java.util.List;
 public class StoryController {
 
     private StoryService storyService;
+    private CommentService commentService;
 
     @Autowired
     public void setStoryService(StoryService storyService) {
         this.storyService = storyService;
     }
 
+    @Autowired
+    public void setCommentService(CommentService commentService) {
+        this.commentService = commentService;
+    }
+
     @RequestMapping("/")
     public String showIndex(Model model) throws Exception {
         List<Story> stories = storyService.findAll();
-        for (Story story : stories) {
-            System.out.println(story.getDateUploaded());
-        }
+        model.addAttribute("stories", stories);
+        return "index";
+    }
+    @RequestMapping(value = "/", params = {"tag"})
+    public String showStoriesByTag(@RequestParam("tag") String tag, Model model) throws Exception {
+        List<Story> stories = storyService.findByTag(tag);
         model.addAttribute("stories", stories);
         return "index";
     }
@@ -51,6 +62,8 @@ public class StoryController {
 
     @RequestMapping(value = "/newStory", method = RequestMethod.POST)
     public String addStory(Story story, @RequestParam MultipartFile file) throws Exception {
+
+        System.out.println(story.getTitle());
         byte[] bytes = file.getBytes();
 
         InputStream in = new ByteArrayInputStream(bytes);
@@ -60,7 +73,7 @@ public class StoryController {
         int orientation = directory.getInt(ExifIFD0Directory.TAG_ORIENTATION);
 
         Integer turn=360;
-//确定旋转度数
+        //确定旋转度数
         if(orientation==0||orientation==1) {
             turn=360;
         } else if(orientation==3) {
@@ -90,29 +103,25 @@ public class StoryController {
         return story.getBytes();
     }
 
-//    @RequestMapping(value = "/getImage/{id}")
-//    public ResponseEntity<byte[]> getImage(@PathVariable(value = "id") Long id) throws SQLException, IOException {
-//        Story story = storyService.findById(id);
-//        byte[] bytes = story.getBytes();
-//
-//        String userDir = System.getProperty("user.home");
-//
-//        Path p1 = Paths.get(userDir, "text.jpg");
-//
-//        Files.write(p1, bytes);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.IMAGE_PNG);
-//        return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
-//    }
-
-
-
     @RequestMapping(value = "/story/{id}")
     public String showStoryDetail(@PathVariable(value = "id") Long id, Model model) throws Exception {
         Story story = storyService.findById(id);
         model.addAttribute("story", story);
+        List<Comment> comments = commentService.listByStory(id);
+        model.addAttribute("comments", comments);
+        model.addAttribute("newComment", new Comment());
+        List<String> tags = storyService.listAllTags();
+        model.addAttribute("tags", tags);
 
         return "article";
     }
+
+    @RequestMapping(value = "/{storyId}/addComment", method = RequestMethod.POST)
+    public String addComment(@PathVariable(value = "storyId") Long storyId, Comment comment) throws Exception {
+        comment.setStoryId(storyId);
+        commentService.save(comment);
+        return "redirect:/story/" + storyId;
+    }
+
+
 }
