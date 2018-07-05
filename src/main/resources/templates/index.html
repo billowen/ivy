@@ -17,6 +17,8 @@
                     <header class="card-header">
                         <div class="card-meta">
                             <time class="timeago" datetime="2017-10-26 20:00" th:datetime="${story.dateUploaded}"></time>
+                            <span> in </span>
+                            <a href="#" th:text="${story.tag}" th:href="@{/(tag=${story.tag})}">Journey</a>
                         </div>
                         <a href="#" th:href="@{/story/{id}(id=${story.id})}">
                             <h4 class="card-title" th:text="${story.title}">Test header</h4>
