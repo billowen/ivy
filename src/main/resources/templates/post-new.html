@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Time machine</title>
     <link rel="stylesheet" href="../static/dist/css/milo.css" th:href="@{/dist/css/milo.css}"/>
-
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <header th:replace="layout::nav"></header>
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <label for="file">Upload</label>
                         <div class="custom-file ">
-                            <input type="file" class="custom-file-input " id="file" name="file" required>
+                            <input type="file" class="custom-file-input " id="file" name="file"  required>
                             <label class="custom-file-label" for="file">Choose file...</label>
                         </div>
                     </div>
@@ -75,6 +75,18 @@
 </footer>
 
 <script src="../static/dist/js/bundle.js" th:src="@{/dist/js/bundle.js}"></script>
+
+<script>
+
+    $('input:file').change(
+        function(e){
+            var filename = e.target.files[0].name;
+            $('.custom-file-label').html(filename);
+            console.log(e.target.files[0].name);
+        });
+</script>
+
+
 
 
 </body>

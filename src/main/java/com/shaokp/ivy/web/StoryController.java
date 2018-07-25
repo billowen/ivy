@@ -65,9 +65,9 @@ public class StoryController {
         Long storyId = comment.getStoryId();
         commentService.delete(comment);
 
-        Story story = storyService.findById(id);
+        Story story = storyService.findById(storyId);
         model.addAttribute("story", story);
-        List<Comment> comments = commentService.listByStory(id);
+        List<Comment> comments = commentService.listByStory(storyId);
         model.addAttribute("comments", comments);
         model.addAttribute("newComment", new Comment());
         List<String> tags = storyService.listAllTags();

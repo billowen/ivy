@@ -45,7 +45,7 @@
                             <time class="timeago" datetime="2017-10-26 20:00" th:datetime="${story.dateUploaded}"></time>
                         </div>
                     </header>
-                    <img src="../static/img/1.jpg" alt="" class="card-img" th:src="@{/getImage/{id}(id=${story.id})}"/>
+                    <img alt="" class="card-img" th:src="@{/getImage/{id}(id=${story.id})}"/>
                     <!--<div class="card-body">-->
                         <!--<p th:text="${story.content}">test test test</p>-->
                     <!--</div>-->
@@ -59,7 +59,7 @@
                                 <h6 th:text="${comment.name}">From Ivy</h6>
                                 <p class="mt-3 mb-2" th:text="${comment.response}">Some comment</p>
                                 <time class="timeago text-muted" datetime="2017-12-30 20:00" th:datetime="${comment.dateUpdate}"></time>
-                                <a href="#" class="float-right"><span class="fa fa-trash-o"></span></a>
+                                <a href="#" th:href="@{/deleteComment(comment=${comment.id})}" class="float-right"><span class="fa fa-trash-o"></span></a>
                             </div>
                         </div>
                         <div class="mt-5">
