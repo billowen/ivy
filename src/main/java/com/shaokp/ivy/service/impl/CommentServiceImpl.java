@@ -23,6 +23,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public Comment findById(Long id) throws Exception {
+        return commentDao.findById(id);
+    }
+
+    @Override
     public void save(Comment comment) throws Exception {
         commentDao.save(comment);
     }

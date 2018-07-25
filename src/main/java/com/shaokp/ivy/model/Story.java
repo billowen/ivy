@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class Story {
     private Long id;
-    private String title;
     private byte[] bytes;
     private LocalDateTime dateUploaded;
     private String tag;
@@ -17,14 +16,6 @@ public class Story {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public byte[] getBytes() {
@@ -57,7 +48,6 @@ public class Story {
         if (o == null || getClass() != o.getClass()) return false;
         Story story = (Story) o;
         return Objects.equals(id, story.id) &&
-                Objects.equals(title, story.title) &&
                 Arrays.equals(bytes, story.bytes) &&
                 Objects.equals(tag, story.tag);
     }
@@ -65,7 +55,7 @@ public class Story {
     @Override
     public int hashCode() {
 
-        int result = Objects.hash(id, title, tag);
+        int result = Objects.hash(id, tag);
         result = 31 * result + Arrays.hashCode(bytes);
         return result;
     }
@@ -74,7 +64,6 @@ public class Story {
     public String toString() {
         return "Story{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
                 ", bytes=" + Arrays.toString(bytes) +
                 ", dateUploaded=" + dateUploaded +
                 ", tag='" + tag +

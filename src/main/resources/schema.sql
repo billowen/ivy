@@ -2,7 +2,6 @@ DROP TABLE IF EXISTS stories;
 CREATE TABLE stories (
   id bigint auto_increment,
   bytes longblob,
-  title varchar(100),
   tag varchar(50),
   dateuploaded timestamp,
   primary key (id)

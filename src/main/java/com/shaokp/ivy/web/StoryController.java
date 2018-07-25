@@ -51,6 +51,31 @@ public class StoryController {
         return "index";
     }
 
+    @RequestMapping(value = "/deleteStory")
+    public String deleteStory(@RequestParam("story") Long id) throws Exception {
+        Story story = storyService.findById(id);
+        storyService.delete(story);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/deleteComment")
+    public String deleteComment(@RequestParam("comment") Long id, Model model) throws Exception {
+        Comment comment = commentService.findById(id);
+        Long storyId = comment.getStoryId();
+        commentService.delete(comment);
+
+        Story story = storyService.findById(id);
+        model.addAttribute("story", story);
+        List<Comment> comments = commentService.listByStory(id);
+        model.addAttribute("comments", comments);
+        model.addAttribute("newComment", new Comment());
+        List<String> tags = storyService.listAllTags();
+        model.addAttribute("tags", tags);
+
+        return "article";
+    }
+
     @RequestMapping(value = "/newStory", method = RequestMethod.GET)
     public String showNewStoryForm(Model model) {
         if (!model.containsAttribute("story")) {
@@ -62,8 +87,6 @@ public class StoryController {
 
     @RequestMapping(value = "/newStory", method = RequestMethod.POST)
     public String addStory(Story story, @RequestParam MultipartFile file) throws Exception {
-
-        System.out.println(story.getTitle());
         byte[] bytes = file.getBytes();
 
         InputStream in = new ByteArrayInputStream(bytes);

@@ -29,7 +29,6 @@ public class StoryDaoImp implements StoryDao {
                 while (rs.next()) {
                     Story story = new Story();
                     story.setId(rs.getLong("id"));
-                    story.setTitle(rs.getString("title"));
                     story.setBytes(rs.getBytes("bytes"));
                     story.setDateUploaded(rs.getTimestamp("dateuploaded").toLocalDateTime());
                     story.setTag(rs.getString("tag"));
@@ -52,7 +51,6 @@ public class StoryDaoImp implements StoryDao {
                 if (rs.next()) {
                     story = new Story();
                     story.setId(rs.getLong("id"));
-                    story.setTitle(rs.getString("title"));
                     story.setBytes(rs.getBytes("bytes"));
                     story.setDateUploaded(rs.getTimestamp("dateuploaded").toLocalDateTime());
                     story.setTag(rs.getString("tag"));
@@ -73,7 +71,6 @@ public class StoryDaoImp implements StoryDao {
                 while (rs.next()) {
                     Story story = new Story();
                     story.setId(rs.getLong("id"));
-                    story.setTitle(rs.getString("title"));
                     story.setBytes(rs.getBytes("bytes"));
                     story.setDateUploaded(rs.getTimestamp("dateuploaded").toLocalDateTime());
                     story.setTag(rs.getString("tag"));
@@ -101,22 +98,20 @@ public class StoryDaoImp implements StoryDao {
 
     @Override
     public void save(Story story) throws SQLException {
-        String saveSql = "insert into stories (title, bytes, tag, dateuploaded) values (?, ?, ?, now())";
-        String updateSql = "update stories set title=?, bytes=?, tag=?, dateuploaded=now() where id=?";
+        String saveSql = "insert into stories (bytes, tag, dateuploaded) values (?, ?, now())";
+        String updateSql = "update stories set bytes=?, tag=?, dateuploaded=now() where id=?";
         try (Connection conn = dataSource.getConnection()) {
             if (story.getId() == null || story.getId() <= 0) {
                 try (PreparedStatement stmt = conn.prepareStatement(saveSql)) {
-                    stmt.setString(1, story.getTitle());
-                    stmt.setBytes(2, story.getBytes());
-                    stmt.setString(3, story.getTag());
+                    stmt.setBytes(1, story.getBytes());
+                    stmt.setString(2, story.getTag());
                     stmt.execute();
                 }
             } else {
                 try (PreparedStatement stmt = conn.prepareStatement(updateSql)) {
-                    stmt.setString(1, story.getTitle());
-                    stmt.setBytes(2, story.getBytes());
-                    stmt.setString(3, story.getTag());
-                    stmt.setLong(4, story.getId());
+                    stmt.setBytes(1, story.getBytes());
+                    stmt.setString(2, story.getTag());
+                    stmt.setLong(3, story.getId());
                     stmt.execute();
                 }
             }
